@@ -1,0 +1,2 @@
+# pynance
+python in finance
