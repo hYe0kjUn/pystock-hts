@@ -1,1 +1,2 @@
-from analy import profit
+from analy import basic, method
+
