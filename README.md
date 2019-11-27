@@ -25,3 +25,4 @@ python in finance
 ### getKospi200()
 + 코스피 200 의 코드, 종목명을 가져옴
 + 종목코드를 넣고 호출
+
