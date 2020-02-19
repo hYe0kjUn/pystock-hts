@@ -1,0 +1,8 @@
+{
+    "id": "string", //stock code
+    "name": "string", //stock name
+    "now_price": "number", //now_price
+    "last_high_price": "number", //high price in lastdate
+    "last_low_price": "number", //low price in lastdate
+    "trade_volume": "string" //trade_volume in lastdate
+}

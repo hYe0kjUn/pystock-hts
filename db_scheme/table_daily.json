@@ -1,0 +1,5 @@
+{
+    "stock_code": "number", //stock code
+    "price": "number", //now_price
+    "time": "datetime" //now time
+}
