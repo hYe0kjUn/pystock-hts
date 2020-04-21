@@ -68,6 +68,8 @@ def getNetProfit(finance_code):
 
 
 def getKospi200():
+    stock_code = []
+    stock_name = []
     for page_num in range(1,21,1):
         url = f'https://finance.naver.com/sise/entryJongmok.nhn?&page={page_num}'
         res = requests.get(url)
@@ -82,4 +84,21 @@ def getKospi200():
             if k:
                 code = k.group()
                 name = item.text
-                print(code," ",name)
+                stock_code.append(code)
+                stock_name.append(name)
+                print(code,"    ",name)
+    return stock_code, stock_name
+
+
+
+while True:
+    getKospi200()
+
+
+def allRequests():
+    stock_price_list = []
+    #var return is list
+    stock_code_list, stock_name_list = getKospi200()
+    for code in stock_code_list:
+        stock_price_list.append(getNowPrice(code))
+

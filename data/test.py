@@ -3,8 +3,8 @@ import csv
 from bs4 import BeautifulSoup
 
 
-def requestTrade(code):
-    url = f'http://hogaplay.com/player/contract.php?d=20200218&c={code}'
+def requestTrade(date,code):
+    url = f'http://hogaplay.com/player/contract.php?d={date}&c={code}'
     res = requests.get(url)
     with open(f'{code}.csv','w') as temp:
         temp.write(res.text)
@@ -41,4 +41,4 @@ def getLowAndMaxPrice(code):
         print('low c :',low_count)
 
 
-requestTrade('026890')
+requestTrade('20200309','026890')
