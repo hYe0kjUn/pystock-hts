@@ -1,6 +1,5 @@
 import requests
 import csv
-from bs4 import BeautifulSoup
 
 
 def requestTrade(date,code):
@@ -39,6 +38,5 @@ def getLowAndMaxPrice(code):
         print('low p :',low_price)
         print('low t :',low_time)
         print('low c :',low_count)
-
 
 requestTrade('20200309','026890')
