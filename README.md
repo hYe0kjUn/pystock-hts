@@ -1,28 +1,11 @@
-# pynance
-python in finance
+# pystock
+running stock in Python 
 
-## basic.py
-### getNowPrice(finance_code)
-+ 현재 한 주당 가격을 가져옴
-+ 종목코드를 넣고 호출
+## 대신증권 API
+- win32.client 를 통해 HTS 를 호출하는 형태
+- window local 환경에서 서버가 띄워져 있어야 호출가능
 
+## stock api serivce
 
-### getTotalStockPrice(finance_code)
-+ 시가 총액을 가져옴
-+ 종목코드를 넣고 호출
-
-
-### getTotalStock(finance_code)
-+ 총 주식 수를 가져옴
-+ 종목코드를 넣고 호출
-
-
-### getNetProfit(finance_code)
-+ 최근 분기의 순이익을 가져옴
-+ 종목코드를 넣고 호출
-
-
-### getKospi200()
-+ 코스피 200 의 코드, 종목명을 가져옴
-+ 종목코드를 넣고 호출
-
+### dashonApi
+- Window 환경에서 HTS 를 호출한 결과 값을 restApi 를 통해 환경에 구애받지 않게끔 호출할 수 있는 api
