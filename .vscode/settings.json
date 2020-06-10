@@ -1,4 +1,7 @@
 {
   "git.ignoreLimitWarning": true,
-  "python.pythonPath": ".pynance/bin/python"
+  "python.pythonPath": ".pynance/bin/python",
+  "python.linting.banditEnabled": false,
+  "python.linting.pylintEnabled": true,
+  "python.linting.enabled": true
 }
