@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+import json
+
 from .dashin_api.connect import CpUtil, CpSysDib
 from .dashin_api.test import *
 
@@ -32,10 +34,7 @@ def getCount(request):
 
 @api_view(['GET'])
 def getStockList(request):
-  stocks_dict = CpUtil().getStockCodeAndName()
-  data = {
-    stocks_dict,
-  }
+  data = CpUtil().getStockCodeAndName()
   return Response(data)
 
 
@@ -44,13 +43,5 @@ def getStockChart():
   stock_chart = CpSysDib().getStockChart()
   data = {
     stock_chart,
-  }
-  return Response(data)
-
-
-def getTest():
-  result = ggg()
-  data = {
-    'result': result,
   }
   return Response(data)

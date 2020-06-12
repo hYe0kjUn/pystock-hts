@@ -21,7 +21,6 @@ from dashinApi import views
 
 urlpatterns = [
     path(r'dashin/', views.getConnect),
-    path(r'dashin/stocks/', views.getCount),
+    path(r'dashin/stock/', views.getCount),
     path(r'dashin/stock/list', views.getStockList),
-    path(r'test/', views.getTest),
 ]

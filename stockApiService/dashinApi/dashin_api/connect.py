@@ -1,6 +1,7 @@
 import sys, os
 import pythoncom
-
+import win32com.client
+import json 
 
 class CpUtil():
 
@@ -13,7 +14,6 @@ class CpUtil():
         
         pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_enpoint)
-        pythoncom.CoUninitialize()
 
         return win_client
 
@@ -107,12 +107,10 @@ class CpSysDib():
 
 #print(CpUtil().getConnect())
 
-print('Test [CpUtil.getConnect] --- ', CpUtil().getConnect())
-
 #print('Test [CpUtil.getCount] --- ', CpUtil().getCount())
 
 #print('Test [CpUtil.getStockCodeList] --- ', CpUtil().getStockCodeList())
 
-#print('Test [CpUtil.getStockCodeToName] --- ',dashiCpUtilnApi().getStockCodeToName('A002220'))
-
+#print('Test [CpUtil.getStockCodeToName] --- ',CpUtil().getStockCodeToName('A002220'))
+#print('Test [CpUtil.getStockCodeAndName] --- ', CpUtil().getStockCodeAndName())
 #print('Test [] --- ', CpSysDib().getStockChart('A005930'))
