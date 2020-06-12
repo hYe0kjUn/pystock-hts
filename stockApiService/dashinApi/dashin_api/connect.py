@@ -76,6 +76,7 @@ class CpSysDib():
     
     def getClient(self, api_method):
         api_endpoint = f'CpSysDib.{api_method}'
+        
         pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_endpoint)
         pythoncom.CoUnInitialize()

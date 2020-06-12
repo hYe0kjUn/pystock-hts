@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .dashin_api.connect import CpUtil, CpSysDib
+from .dashin_api.test import *
 
 # Create your views here.
 
@@ -44,4 +45,12 @@ def getStockChart():
   data = {
     stock_chart,
   }
-  return data
+  return Response(data)
+
+
+def getTest():
+  result = ggg()
+  data = {
+    'result': result,
+  }
+  return Response(data)
