@@ -1,5 +1,4 @@
 import win32com.client
-import sys, os
 
 
 class CpUtil():
@@ -8,6 +7,9 @@ class CpUtil():
         api_enpoint = f'CpUtil.{api_method}'
         win_client = win32com.client.Dispatch(api_enpoint)
         return win_client
+
+    def getTest(self):
+        return 1
 
     # 연결 상태 확인
     def getConnect(self):
@@ -73,16 +75,14 @@ class CpSysDib():
 
     
 
-#print(CpUtil().getConnect('CpCybos'))
+#print(CpUtil().getConnect())
 
-#print('Test [CpUtil.getConnect] --- ', CpUtil().getConnect())
+print('Test [CpUtil.getConnect] --- ', CpUtil().getConnect())
 
 #print('Test [CpUtil.getCount] --- ', CpUtil().getCount())
 
 #print('Test [CpUtil.getStockCodeList] --- ', CpUtil().getStockCodeList())
 
 #print('Test [CpUtil.getStockCodeToName] --- ',dashiCpUtilnApi().getStockCodeToName('A002220'))
-
-print('Test [CpUtil.getStockCodeAndName] --- ', CpUtil().getStockCodeAndName())
 
 #print('Test [] --- ', CpSysDib().getStockChart('A005930'))
