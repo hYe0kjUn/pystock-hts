@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
 from dashinApi import views
 
 
 urlpatterns = [
     path(r'dashin/', views.getConnect),
-    path(r'dashin/count/', views.getCount),
-
+    path(r'dashin/stocks/', views.getCount),
+    path(r'dashin/stock/list', views.getStockList),
     path(r'test/', views.getTest),
 ]

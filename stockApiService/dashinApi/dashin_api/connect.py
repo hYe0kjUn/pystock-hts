@@ -1,11 +1,20 @@
-import win32com.client
+import sys, os
+import pythoncom
 
 
 class CpUtil():
 
     def getClient(self, api_method):
+        """
+        [api_method]:
+            Dispatch 를 통해 호출할 method
+        """
         api_enpoint = f'CpUtil.{api_method}'
+        
+        pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_enpoint)
+        pythoncom.CoUninitialize()
+
         return win_client
 
     def getTest(self):
@@ -13,11 +22,17 @@ class CpUtil():
 
     # 연결 상태 확인
     def getConnect(self):
+        """
+        1 (connected), 0 (disconnected) 의 값을 int 로 return
+        """
         return self.getClient('CpCybos').IsConnect
 
 
     # 전체 종목 수
     def getCount(self):
+        """
+        전체 종목 갯수 int로 return
+        """
         if self.getConnect() == 1:
             return self.getClient('CpStockCode').getCount()
         else:
@@ -25,6 +40,9 @@ class CpUtil():
 
     # 전체 종목 코드 리스트
     def getStockCodeList(self):
+        """
+        전체 종목 코드 리스트 return
+        """
         if self.getConnect() == 1:
             return self.getClient('CpCodeMgr').GetStockListByMarket(1)
         else:
@@ -32,6 +50,9 @@ class CpUtil():
 
     # 종목코드에 대한 종목 이름 반환
     def getStockCodeToName(self, stock_code):
+        """
+        stock_code 에 대한 종목 이름을 str으로 return
+        """
         if self.getConnect() == 1:
             return self.getClient('CpCodeMgr').CodeToName(stock_code)
         else:
@@ -39,6 +60,9 @@ class CpUtil():
 
     # 전체 종목에 대한 코드 (key), 이름 (value) 반환
     def getStockCodeAndName(self):
+        """
+        전체 종목에 대한 코드와 이름을 dict 로 return
+        """
         if self.getConnect() == 1:
             stock_code_list = self.getStockCodeList()
             stock_info_obj = {}
@@ -54,11 +78,17 @@ class CpSysDib():
     
     def getClient(self, api_method):
         api_endpoint = f'CpSysDib.{api_method}'
+        
+        pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_endpoint)
+        pythoncom.CoUnInitialize()
 
         return win_client
 
     def getStockChart(self, stock_code=None):
+        """
+        stock_code 에 대한 chart return
+        """
         if CpUtil().getConnect() == 1:
             api_method = 'StockChart'
 
