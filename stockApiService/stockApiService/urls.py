@@ -23,4 +23,6 @@ urlpatterns = [
     path(r'dashin/', views.getConnect),
     path(r'dashin/stock/', views.getCount),
     path(r'dashin/stock/list', views.getStockList),
+    path(r'dashin/stock/chart', views.getStockChart),
+    path(r'dashin/stock/techinfo/<str:stock_code>/', views.getStockTechChart),
 ]

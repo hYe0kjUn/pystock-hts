@@ -38,10 +38,62 @@ def getStockList(request):
   return Response(data)
 
 
+@api_view(['POST'])
+def getStockChart(request):
+  json_body = json.loads(request.body)
+  result = {}
+  if json_body:
+    try:
+      #json_body parsing
+      request_count = json_body['request_count']
+      stock_code = json_body['stock_code']
+      field = json_body['field']
+    except:
+      data = {
+        "result": "didn't parse json",
+      }
+    try:
+      date_list, stock_chart_list = CpSysDib().getStockChart(request_count, stock_code, field)
+      print('hyeokjun5')
+      print(date_list)
+      print(stock_chart_list)
+      for date, stock_chart in zip(date_list, stock_chart_list):
+        result[date] = stock_chart
+      data = {
+        "stock_code": stock_code,
+        "stock_name": CpUtil().getStockCodeToName(stock_code),
+        "result": result,
+      }
+    except:
+      data = {
+        "result": "json data is invalid"
+      }
+  else:
+    data = {
+      "result": "has no json body",
+    }
+  return Response(data)
+
+
 @api_view(['GET'])
-def getStockChart():
-  stock_chart = CpSysDib().getStockChart()
-  data = {
-    stock_chart,
-  }
+def getStockTechChart(request, stock_code):
+  try:
+    now_price, per, esp, last_year = CpSysDib().getStockPer(stock_code)
+    year = str(last_year)[0:4]
+    month = str(last_year)[4:]
+    last_year = f'{year}-{month}'
+    data = {
+      "stock_code": stock_code,
+      "stock_name": CpUtil().getStockCodeToName(stock_code),
+      "result": {
+        "now_price": now_price,
+        "per": per,
+        "esp": esp,
+        "last_year": last_year,
+      },
+    }
+  except:
+    data = {
+      "result": "stock_code is invalid",
+    }
   return Response(data)
