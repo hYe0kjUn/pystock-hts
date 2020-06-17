@@ -79,10 +79,11 @@ def getNiceStock(stock_code):
     averageVolume = (sum(volumes) - volumes[0]) / (len(volumes) -1)
 
     if(volumes[0] > averageVolume * 10):
-        print("대박주", stock_code)
+        print("good", stock_code)
     else:
-        print("일반주", volumes[0] / averageVolume)
+        print("general", volumes[0] / averageVolume)
     time.sleep(1)
+
 
 for i in stock_codes:
     getNiceStock(i)
