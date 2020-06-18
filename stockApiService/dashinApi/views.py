@@ -58,6 +58,7 @@ def getStockChart(request):
           "stock_name": CpUtil().getStockCodeToName(stock_code),
           "result": result,
         }
+        status = 200
 
       except:
         data = {
