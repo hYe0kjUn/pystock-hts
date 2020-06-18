@@ -120,6 +120,7 @@ class CpSysDib():
             instStockChart.SetInputValue(9, ord('1'))
                 
             print('henry3')
+            pythoncom.CoUninitialize() 
             pythoncom.CoInitialize()
             instStockChart.BlockRequest()
             print('henry4')
