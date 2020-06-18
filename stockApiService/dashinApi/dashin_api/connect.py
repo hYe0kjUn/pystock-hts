@@ -46,12 +46,9 @@ class CpUtil():
         """
         전체 종목 코드 리스트 return
         """
-        if self.getConnect() == 1:
-            res = self.getClient('CpCodeMgr').GetStockListByMarket(1)
-            pythoncom.CoUninitialize()
-            return res
-        else:
-            return 'check the connected'
+        res = self.getClient('CpCodeMgr').GetStockListByMarket(1)
+        pythoncom.CoUninitialize()
+        return res
 
     # 종목코드에 대한 종목 이름 반환
     def getStockCodeToName(self, stock_code):
@@ -98,33 +95,20 @@ class CpSysDib():
         date_list = []
 
         fields = [request_field, 0]
-
-        print('henry6')
-        pythoncom.CoInitialize()
         instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
-        print('henry5')
+        
         for field in fields:
             instStockChart.SetInputValue(0, stock_code) #종목코드
-            print('henry7')
             instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
             instStockChart.SetInputValue(4, request_count) #요청 갯수
-
             #요청 받을 필드값
             instStockChart.SetInputValue(5, field)
             #0: 날짜 / 1: 시간 / 2: 시가 / 3: 고가 / 4: 저가 / 5: 종가 / 8: 거래량 / 9: 거래대금
-
             instStockChart.SetInputValue(6, ord('D')) #차트 구분
             # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
-
             instStockChart.SetInputValue(9, ord('1'))
                 
-            print('henry3')
-            pythoncom.CoUninitialize() 
-            print('henry9')
-            pythoncom.CoInitialize()
-            print('henry8')
             instStockChart.BlockRequest()
-            print('henry4')
 
             data_count = instStockChart.GetHeaderValue(3)
                 
@@ -138,7 +122,6 @@ class CpSysDib():
             else:
                 for i in range(data_count):
                     stock_chart_list.append(instStockChart.GetDataValue(0, i))
-        pythoncom.CoUninitialize() 
         return date_list, stock_chart_list
 
 
