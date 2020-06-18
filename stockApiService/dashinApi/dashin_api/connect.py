@@ -12,7 +12,6 @@ class CpUtil():
         """
         api_enpoint = f'CpUtil.{api_method}'
         
-        pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_enpoint)
         
         return win_client
@@ -117,7 +116,6 @@ class CpSysDib():
                 instStockChart.SetInputValue(9, ord('1'))
                 
                 print('henry3')
-                pythoncom.CoInitialize()
                 instStockChart.BlockRequest()
                 print('henry4')
 
