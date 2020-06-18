@@ -27,7 +27,6 @@ class CpUtil():
         """
         res = self.getClient('CpCybos').IsConnect
 
-        pythoncom.CoUninitialize()
         return res
 
     # 전체 종목 수
