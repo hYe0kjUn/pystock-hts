@@ -54,9 +54,6 @@ def getStockChart(request):
       }
     try:
       date_list, stock_chart_list = CpSysDib().getStockChart(request_count, stock_code, field)
-      print('hyeokjun5')
-      print(date_list)
-      print(stock_chart_list)
       for date, stock_chart in zip(date_list, stock_chart_list):
         result[date] = stock_chart
       data = {

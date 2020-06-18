@@ -14,7 +14,7 @@ class CpUtil():
         
         pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_enpoint)
-
+        
         return win_client
 
     def getTest(self):
@@ -25,8 +25,9 @@ class CpUtil():
         """
         1 (connected), 0 (disconnected) 의 값을 int 로 return
         """
-        return self.getClient('CpCybos').IsConnect
-
+        res = self.getClient('CpCybos').IsConnect
+        pythoncom.CoUninitialize()
+        return res
 
     # 전체 종목 수
     def getCount(self):
@@ -123,7 +124,7 @@ class CpSysDib():
                 else:
                     for i in range(data_count):
                         stock_chart_list.append(instStockChart.GetDataValue(0, i))
-
+            pythoncom.CoUninitialize()
             return date_list, stock_chart_list
         else:
             return 'check the connected'
