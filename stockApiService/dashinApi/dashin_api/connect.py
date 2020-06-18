@@ -26,6 +26,7 @@ class CpUtil():
         1 (connected), 0 (disconnected) 의 값을 int 로 return
         """
         res = self.getClient('CpCybos').IsConnect
+
         pythoncom.CoUninitialize()
         return res
 
@@ -101,7 +102,8 @@ class CpSysDib():
             fields = [request_field, 0]
 
             instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
-            
+            pythoncom.CoInitialize()
+
             for field in fields:
                 instStockChart.SetInputValue(0, stock_code) #종목코드
                 instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
@@ -115,8 +117,7 @@ class CpSysDib():
                 # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
 
                 instStockChart.SetInputValue(9, ord('1'))
-
-                pythoncom.CoInitialize()
+                
                 instStockChart.BlockRequest()
 
                 data_count = instStockChart.GetHeaderValue(3)
