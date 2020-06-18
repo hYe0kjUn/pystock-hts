@@ -26,6 +26,7 @@ class CpUtil():
         1 (connected), 0 (disconnected) 의 값을 int 로 return
         """
         res = self.getClient('CpCybos').IsConnect
+        pythoncom.CoUninitialize()
         return res
 
     # 전체 종목 수
@@ -169,4 +170,4 @@ class CpSysDib():
 
 #print('Test [CpUtil.getStockCodeToName] --- ',CpUtil().getStockCodeToName('A002220'))
 #print('Test [CpUtil.getStockCodeAndName] --- ', CpUtil().getStockCodeAndName())
-print('Test [getStockChart] --- ', CpSysDib().getStockChart(10,'A003540',5))
+#print('Test [getStockChart] --- ', CpSysDib().getStockChart(10,'A003540',5))
