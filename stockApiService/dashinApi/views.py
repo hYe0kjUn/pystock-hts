@@ -50,7 +50,9 @@ def getStockChart(request):
       field = json_body['field']
 
       try:
+        print('henry1')
         date_list, stock_chart_list = CpSysDib().getStockChart(request_count, stock_code, field)
+        print('henry2')
         for date, stock_chart in zip(date_list, stock_chart_list):
           result[date] = stock_chart
         data = {
@@ -59,7 +61,7 @@ def getStockChart(request):
           "result": result,
         }
         status = 200
-        
+
       except:
         data = {
           "result": "json data is invalid"
