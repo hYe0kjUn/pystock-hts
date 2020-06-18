@@ -167,4 +167,4 @@ class CpSysDib():
 
 #print('Test [CpUtil.getStockCodeToName] --- ',CpUtil().getStockCodeToName('A002220'))
 #print('Test [CpUtil.getStockCodeAndName] --- ', CpUtil().getStockCodeAndName())
-print('Test [getStockChart] --- ', CpSysDib().getStockChart(10,'A003540',5))
+#print('Test [getStockChart] --- ', CpSysDib().getStockChart(10,'A003540',5))

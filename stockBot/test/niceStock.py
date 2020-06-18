@@ -36,5 +36,3 @@ import time
 #     else:
 #       print(f'general {stock_code} {stock_name}')
 #       time.sleep(0.5)
-
-print(apiRequestService.dashin().getStockChart(60, 'A000020', 8))
