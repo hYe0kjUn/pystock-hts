@@ -142,22 +142,21 @@ class CpSysDib():
         """
         stock_code 에 대한 PER 지수 반환
         """
-        if CpUtil().getConnect() == 1:
-            instMarketEye = win32com.client.Dispatch("CpSysDib.MarketEye")
+        pythoncom.CoInitialize()
+        instMarketEye = win32com.client.Dispatch("CpSysDib.MarketEye")
 
-            instMarketEye.SetInputValue(0, (4, 67, 70, 111))
-            instMarketEye.SetInputValue(1, stock_code)
+        instMarketEye.SetInputValue(0, (4, 67, 70, 111))
+        instMarketEye.SetInputValue(1, stock_code)
 
-            pythoncom.CoInitialize()
-            instMarketEye.BlockRequest()
+        instMarketEye.BlockRequest()
 
-            now_price = instMarketEye.GetDataValue(0, 0)
-            per = instMarketEye.GetDataValue(1, 0)
-            eps = instMarketEye.GetDataValue(2, 0)
-            last_year = instMarketEye.GetDataValue(3, 0)
+        now_price = instMarketEye.GetDataValue(0, 0)
+        per = instMarketEye.GetDataValue(1, 0)
+        eps = instMarketEye.GetDataValue(2, 0)
+        last_year = instMarketEye.GetDataValue(3, 0)
 
-            pythoncom.CoUninitialize()
-            return now_price, per, eps, last_year
+        pythoncom.CoUninitialize()
+        return now_price, per, eps, last_year
 
 
     
