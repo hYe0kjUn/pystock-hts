@@ -93,12 +93,14 @@ class CpSysDib():
         """
         stock_code 에 대한 chart return
         """
+        
         stock_chart_list = []
         date_list = []
 
         fields = [request_field, 0]
 
         print('henry6')
+        pythoncom.CoInitialize()
         instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
         print('henry5')
         for field in fields:
@@ -131,9 +133,9 @@ class CpSysDib():
             else:
                 for i in range(data_count):
                     stock_chart_list.append(instStockChart.GetDataValue(0, i))
-            
+        pythoncom.CoUninitialize() 
         return date_list, stock_chart_list
-        
+
 
     def getStockPer(self, stock_code):
         """
