@@ -101,6 +101,7 @@ class CpSysDib():
         fields = [request_field, 0]
 
         print('henry6')
+        pythoncom.CoInitialize()
         instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
         print('henry5')
         for field in fields:
