@@ -19,7 +19,7 @@ class dashin():
       "stock_code": str(stock_code),
       "field": int(field)
     })
-    return requests.post(url=url, headers={'content-type': 'application/json'}, data=data)
+    return requests.post(url=url, data=data)
 
   def getAllStocks(self):
     url = self.host+"dashin/stock/list"

@@ -94,7 +94,6 @@ class CpSysDib():
         """
         stock_code 에 대한 chart return
         """
-        
         stock_chart_list = []
         date_list = []
 

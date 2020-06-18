@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+import time
+
 import json
 
 from .dashin_api.connect import CpUtil, CpSysDib
@@ -78,6 +80,7 @@ def getStockChart(request):
       "result": "has no json body",
     }
     status = 400
+    time.sleep(1)
   return Response(data, status)
 
 
