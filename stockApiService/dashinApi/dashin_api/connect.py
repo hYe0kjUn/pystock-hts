@@ -103,7 +103,6 @@ class CpSysDib():
 
             print('henry6')
             instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
-            pythoncom.CoInitialize()
             print('henry5')
             for field in fields:
                 instStockChart.SetInputValue(0, stock_code) #종목코드
@@ -120,6 +119,7 @@ class CpSysDib():
                 instStockChart.SetInputValue(9, ord('1'))
                 
                 print('henry3')
+                pythoncom.CoInitialize()
                 instStockChart.BlockRequest()
                 print('henry4')
 
