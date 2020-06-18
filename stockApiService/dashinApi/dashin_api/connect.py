@@ -26,7 +26,6 @@ class CpUtil():
         1 (connected), 0 (disconnected) 의 값을 int 로 return
         """
         res = self.getClient('CpCybos').IsConnect
-        pythoncom.CoUninitialize()
         return res
 
     # 전체 종목 수
