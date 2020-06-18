@@ -134,7 +134,6 @@ class CpSysDib():
                 else:
                     for i in range(data_count):
                         stock_chart_list.append(instStockChart.GetDataValue(0, i))
-                pythoncom.CoUninitialize()
             
             return date_list, stock_chart_list
         else:
