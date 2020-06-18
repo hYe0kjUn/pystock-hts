@@ -34,12 +34,9 @@ class CpUtil():
         """
         전체 종목 갯수 int로 return
         """
-        if self.getConnect() == 1:
-            res = self.getClient('CpStockCode').getCount()
-            pythoncom.CoUninitialize()
-            return res
-        else:
-            return 'check the connected'
+        res = self.getClient('CpStockCode').getCount()
+        pythoncom.CoUninitialize()
+        return res
 
     # 전체 종목 코드 리스트
     def getStockCodeList(self):
@@ -55,37 +52,26 @@ class CpUtil():
         """
         stock_code 에 대한 종목 이름을 str으로 return
         """
-        if self.getConnect() == 1:
-            res = self.getClient('CpCodeMgr').CodeToName(stock_code)
-            pythoncom.CoUninitialize()
-            return res
-        else:
-            return 'check the connected'
+        res = self.getClient('CpCodeMgr').CodeToName(stock_code)
+        pythoncom.CoUninitialize()
+        return res
 
     # 전체 종목에 대한 코드 (key), 이름 (value) 반환
     def getStockCodeAndName(self):
         """
         전체 종목에 대한 코드와 이름을 dict 로 return
         """
-        if self.getConnect() == 1:
-            stock_code_list = self.getStockCodeList()
-            stock_info_obj = {}
-            for stock_code in stock_code_list:
-                stock_name = self.getStockCodeToName(stock_code)
-                pythoncom.CoUninitialize()
-                stock_info_obj[stock_code] = stock_name
-            return stock_info_obj
-        else:
-            return 'check the connected'
+
+        stock_code_list = self.getStockCodeList()
+        stock_info_obj = {}
+        for stock_code in stock_code_list:
+            stock_name = self.getStockCodeToName(stock_code)
+            stock_info_obj[stock_code] = stock_name
+        pythoncom.CoUninitialize()
+        return stock_info_obj
 
 
 class CpSysDib():
-    
-    def getClient(self, api_method):
-        api_endpoint = f'CpSysDib.{api_method}'
-        win_client = win32com.client.Dispatch(api_endpoint)
-
-        return win_client
 
     def getStockChart(self, request_count, stock_code, request_field):
         """
@@ -95,33 +81,49 @@ class CpSysDib():
         date_list = []
 
         fields = [request_field, 0]
+
+        pythoncom.CoInitialize()
         instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
         
         for field in fields:
+            
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(0, stock_code) #종목코드
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(4, request_count) #요청 갯수
             #요청 받을 필드값
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(5, field)
             #0: 날짜 / 1: 시간 / 2: 시가 / 3: 고가 / 4: 저가 / 5: 종가 / 8: 거래량 / 9: 거래대금
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(6, ord('D')) #차트 구분
             # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
+            pythoncom.CoInitialize()
             instStockChart.SetInputValue(9, ord('1'))
                 
+            pythoncom.CoInitialize()
             instStockChart.BlockRequest()
 
+            pythoncom.CoInitialize()
             data_count = instStockChart.GetHeaderValue(3)
                 
             if stock_chart_list:
                 for i in range(data_count):
+                    pythoncom.CoInitialize()
                     year = str(instStockChart.GetDataValue(0, i))[0:4]
+                    pythoncom.CoInitialize()
                     month = str(instStockChart.GetDataValue(0, i))[4:6]
+                    pythoncom.CoInitialize()
                     day = str(instStockChart.GetDataValue(0, i))[6:]
                     date = f'{year}-{month}-{day}'
                     date_list.append(date)
             else:
                 for i in range(data_count):
+                    pythoncom.CoInitialize()
                     stock_chart_list.append(instStockChart.GetDataValue(0, i))
+        pythoncom.CoUninitialize()
         return date_list, stock_chart_list
 
 
@@ -132,14 +134,21 @@ class CpSysDib():
         pythoncom.CoInitialize()
         instMarketEye = win32com.client.Dispatch("CpSysDib.MarketEye")
 
+        pythoncom.CoInitialize()
         instMarketEye.SetInputValue(0, (4, 67, 70, 111))
+        pythoncom.CoInitialize()
         instMarketEye.SetInputValue(1, stock_code)
 
+        pythoncom.CoInitialize()
         instMarketEye.BlockRequest()
 
+        pythoncom.CoInitialize()
         now_price = instMarketEye.GetDataValue(0, 0)
+        pythoncom.CoInitialize()
         per = instMarketEye.GetDataValue(1, 0)
+        pythoncom.CoInitialize()
         eps = instMarketEye.GetDataValue(2, 0)
+        pythoncom.CoInitialize()
         last_year = instMarketEye.GetDataValue(3, 0)
 
         pythoncom.CoUninitialize()
