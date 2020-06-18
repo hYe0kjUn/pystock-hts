@@ -87,6 +87,7 @@ def getStockChart(request):
 @api_view(['GET'])
 def getStockTechChart(request, stock_code):
   try:
+    
     now_price, per, esp, last_year = CpSysDib().getStockPer(stock_code)
     year = str(last_year)[0:4]
     month = str(last_year)[4:]
