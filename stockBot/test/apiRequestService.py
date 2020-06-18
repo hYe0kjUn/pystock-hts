@@ -2,25 +2,25 @@ import requests
 import json
 
 class dashin():
-  host = "localhost:8000/"
+  host = "http://1.230.33.44:8000/"
 
   def getConnected(self):
     url = self.host+"dashin/"
     return requests.get(url)
 
   def getStockCount(self):
-    url = self.host+"dashin/stock/"
+    url = self.host+"dashin/stock"
     return requests.get(url)
 
-  def getStockChart(self ,request_count, stock_code, field):
+  def getStockChart(self , request_count, stock_code, field):
     url = self.host+"dashin/stock/chart"
     data = {
-      "request_count": request_count,
-      "stock_code": stock_code,
-      "field": field,
+      "request_count": int(request_count),
+      "stock_code": str(stock_code),
+      "field": int(field)
     }
-    return requests.post(url, data)
+    return requests.post(url, json.dumps(data))
 
   def getAllStocks(self):
-    url = self.host+"dashin/stock"
+    url = self.host+"dashin/stock/list"
     return requests.get(url)

@@ -35,7 +35,9 @@ class CpUtil():
         전체 종목 갯수 int로 return
         """
         if self.getConnect() == 1:
-            return self.getClient('CpStockCode').getCount()
+            res = self.getClient('CpStockCode').getCount()
+            pythoncom.CoUninitialize()
+            return res
         else:
             return 'check the connected'
 
@@ -45,7 +47,9 @@ class CpUtil():
         전체 종목 코드 리스트 return
         """
         if self.getConnect() == 1:
-            return self.getClient('CpCodeMgr').GetStockListByMarket(1)
+            res = self.getClient('CpCodeMgr').GetStockListByMarket(1)
+            pythoncom.CoUninitialize()
+            return res
         else:
             return 'check the connected'
 
@@ -55,7 +59,9 @@ class CpUtil():
         stock_code 에 대한 종목 이름을 str으로 return
         """
         if self.getConnect() == 1:
-            return self.getClient('CpCodeMgr').CodeToName(stock_code)
+            res = self.getClient('CpCodeMgr').CodeToName(stock_code)
+            pythoncom.CoUninitialize()
+            return res
         else:
             return 'check the connected'
 
@@ -69,6 +75,7 @@ class CpUtil():
             stock_info_obj = {}
             for stock_code in stock_code_list:
                 stock_name = self.getStockCodeToName(stock_code)
+                pythoncom.CoUninitialize()
                 stock_info_obj[stock_code] = stock_name
             return stock_info_obj
         else:
@@ -147,6 +154,7 @@ class CpSysDib():
             eps = instMarketEye.GetDataValue(2, 0)
             last_year = instMarketEye.GetDataValue(3, 0)
 
+            pythoncom.CoUninitialize()
             return now_price, per, eps, last_year
 
 
