@@ -12,6 +12,7 @@ class CpUtil():
         """
         api_enpoint = f'CpUtil.{api_method}'
         
+        pythoncom.CoInitialize()
         win_client = win32com.client.Dispatch(api_enpoint)
         
         return win_client
@@ -92,49 +93,47 @@ class CpSysDib():
         """
         stock_code 에 대한 chart return
         """
-        if CpUtil().getConnect() == 1:
-            stock_chart_list = []
-            date_list = []
+        stock_chart_list = []
+        date_list = []
 
-            fields = [request_field, 0]
+        fields = [request_field, 0]
 
-            print('henry6')
-            instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
-            print('henry5')
-            for field in fields:
-                instStockChart.SetInputValue(0, stock_code) #종목코드
-                instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
-                instStockChart.SetInputValue(4, request_count) #요청 갯수
+        print('henry6')
+        instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
+        print('henry5')
+        for field in fields:
+            instStockChart.SetInputValue(0, stock_code) #종목코드
+            instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
+            instStockChart.SetInputValue(4, request_count) #요청 갯수
 
-                #요청 받을 필드값
-                instStockChart.SetInputValue(5, field)
-                #0: 날짜 / 1: 시간 / 2: 시가 / 3: 고가 / 4: 저가 / 5: 종가 / 8: 거래량 / 9: 거래대금
+            #요청 받을 필드값
+            instStockChart.SetInputValue(5, field)
+            #0: 날짜 / 1: 시간 / 2: 시가 / 3: 고가 / 4: 저가 / 5: 종가 / 8: 거래량 / 9: 거래대금
 
-                instStockChart.SetInputValue(6, ord('D')) #차트 구분
-                # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
+            instStockChart.SetInputValue(6, ord('D')) #차트 구분
+            # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
 
-                instStockChart.SetInputValue(9, ord('1'))
+            instStockChart.SetInputValue(9, ord('1'))
                 
-                print('henry3')
-                instStockChart.BlockRequest()
-                print('henry4')
+            print('henry3')
+            instStockChart.BlockRequest()
+            print('henry4')
 
-                data_count = instStockChart.GetHeaderValue(3)
+            data_count = instStockChart.GetHeaderValue(3)
                 
-                if stock_chart_list:
-                    for i in range(data_count):
-                        year = str(instStockChart.GetDataValue(0, i))[0:4]
-                        month = str(instStockChart.GetDataValue(0, i))[4:6]
-                        day = str(instStockChart.GetDataValue(0, i))[6:]
-                        date = f'{year}-{month}-{day}'
-                        date_list.append(date)
-                else:
-                    for i in range(data_count):
-                        stock_chart_list.append(instStockChart.GetDataValue(0, i))
+            if stock_chart_list:
+                for i in range(data_count):
+                    year = str(instStockChart.GetDataValue(0, i))[0:4]
+                    month = str(instStockChart.GetDataValue(0, i))[4:6]
+                    day = str(instStockChart.GetDataValue(0, i))[6:]
+                    date = f'{year}-{month}-{day}'
+                    date_list.append(date)
+            else:
+                for i in range(data_count):
+                    stock_chart_list.append(instStockChart.GetDataValue(0, i))
             
-            return date_list, stock_chart_list
-        else:
-            return 'check the connected'
+        return date_list, stock_chart_list
+        
 
     def getStockPer(self, stock_code):
         """
