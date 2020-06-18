@@ -14,12 +14,12 @@ class dashin():
 
   def getStockChart(self , request_count, stock_code, field):
     url = self.host+"dashin/stock/chart"
-    data = {
+    data = json.dumps({
       "request_count": int(request_count),
       "stock_code": str(stock_code),
       "field": int(field)
-    }
-    return requests.post(url=url, headers={'content-type': 'application/json'}, data=json.dumps(data))
+    })
+    return requests.post(url=url, headers={'content-type': 'application/json'}, data=data)
 
   def getAllStocks(self):
     url = self.host+"dashin/stock/list"
