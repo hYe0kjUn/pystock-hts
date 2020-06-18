@@ -118,7 +118,9 @@ class CpSysDib():
 
                 instStockChart.SetInputValue(9, ord('1'))
                 
+                print('henry3')
                 instStockChart.BlockRequest()
+                print('henry4')
 
                 data_count = instStockChart.GetHeaderValue(3)
                 
