@@ -48,23 +48,26 @@ def getStockChart(request):
       request_count = json_body['request_count']
       stock_code = json_body['stock_code']
       field = json_body['field']
+      
+      try:
+        date_list, stock_chart_list = CpSysDib().getStockChart(request_count, stock_code, field)
+        for date, stock_chart in zip(date_list, stock_chart_list):
+          result[date] = stock_chart
+        data = {
+          "stock_code": stock_code,
+          "stock_name": CpUtil().getStockCodeToName(stock_code),
+          "result": result,
+        }
+
+      except:
+        data = {
+          "result": "json data is invalid"
+        }
+        status = 400
+
     except:
       data = {
         "result": "didn't parse json",
-      }
-    try:
-      date_list, stock_chart_list = CpSysDib().getStockChart(request_count, stock_code, field)
-      for date, stock_chart in zip(date_list, stock_chart_list):
-        result[date] = stock_chart
-      data = {
-        "stock_code": stock_code,
-        "stock_name": CpUtil().getStockCodeToName(stock_code),
-        "result": result,
-      }
-      status = 200
-    except:
-      data = {
-        "result": "json data is invalid"
       }
       status = 400
   else:
