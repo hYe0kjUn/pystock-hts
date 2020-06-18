@@ -104,7 +104,6 @@ class CpSysDib():
             instStockChart = win32com.client.Dispatch("CpSysDib.StockChart")
             print('henry5')
             for field in fields:
-                pythoncom.CoInitialize()
                 instStockChart.SetInputValue(0, stock_code) #종목코드
                 instStockChart.SetInputValue(1, ord('2')) #1=기간, 2=갯수
                 instStockChart.SetInputValue(4, request_count) #요청 갯수
@@ -119,6 +118,7 @@ class CpSysDib():
                 instStockChart.SetInputValue(9, ord('1'))
                 
                 print('henry3')
+                pythoncom.CoInitialize()
                 instStockChart.BlockRequest()
                 print('henry4')
 
