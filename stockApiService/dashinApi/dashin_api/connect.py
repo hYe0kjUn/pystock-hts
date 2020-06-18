@@ -121,7 +121,9 @@ class CpSysDib():
                 
             print('henry3')
             pythoncom.CoUninitialize() 
+            print('henry9')
             pythoncom.CoInitialize()
+            print('henry8')
             instStockChart.BlockRequest()
             print('henry4')
 
