@@ -7,5 +7,5 @@ running stock in Python
 
 ## stock api serivce
 
-### dashonApi
+### dashinApi
 - Window 환경에서 HTS 를 호출한 결과 값을 restApi 를 통해 환경에 구애받지 않게끔 호출할 수 있는 api
