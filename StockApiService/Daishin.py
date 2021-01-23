@@ -111,4 +111,3 @@ class CpSysDib():
         per = instMarketEye.GetHeaderValue(98)
 
         return per
-
