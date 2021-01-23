@@ -23,6 +23,8 @@
     - getStockCodeAndNameAll -> (object {"stock_code": "stock_name", ... } )
         - 전체 종목에 대한 코드 (key) 이름 (value) 반환
 
+
+
 **CpSysDib**
 
     - getStockChartPriceToDate(date_count: number, stock_code: string) -> date_list: array, stcok_chart_list: array
