@@ -1,7 +1,6 @@
 
 import sys, os
 import win32com.client
-import json 
 
 class CpUtil():
     def __request(self, endpoint):
@@ -45,7 +44,7 @@ class CpUtil():
         return res
 
     # 전체 종목에 대한 코드 (key), 이름 (value) 반환
-    def getStockCodeAndName(self):
+    def getStockCodeAndNameAll(self):
         """
         전체 종목에 대한 코드와 이름을 dict 로 return
         """
