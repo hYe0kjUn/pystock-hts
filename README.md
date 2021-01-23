@@ -7,10 +7,12 @@
 - 환경: Windows10
 - 언어: Python3 
 
-- 대신증권 : Cybos Plus 가 활성화 되어 있어야함. 
+
+- 증권사 별 환경
+    - 대신증권 : Cybos Plus 가 활성화 되어 있어야함. [다운로드](https://money2.daishin.com/E5/WTS/Customer/GuideTrading/DW_CybosPlus_Page.aspx?p=8812&v=8632&m=9508)
 
 ### StockApiService
 
-- [Dashin API](Documents/dashin.md)
+- [Daishin API](Documents/daishin.md)
 
 - [Kiwoom API](Documents/Kiwoom.md)
