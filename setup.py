@@ -2,19 +2,21 @@ from setuptools import setup, find_packages
  
 setup(
     # 배포할 패키지의 이름을 적어줍니다. setup.py파일을 가지는 폴더 이름과 동일하게 합니다.
-    name                = 'pystock',
+    name                = 'pystock-hts',
     # 배포할 패키지의 버전을 적어줍니다. 첫 등록이므로 0.1 또는 0.0.1을 사용합니다.
-    version             = '0.0.1',
+    version             = '0.0.5',
     # 배포할 패키지에 대한 설명을 작성합니다.
     description         = 'HTS stock api service in python',
+    # 배포할 패키지의 긴 설명을 작성합니다. 
+    long_description    = open('pypi.md').read(),
     # 배포하는 사람의 이름을 작성합니다.
     author              = 'henry kwon',
     # 배포하는 사람의 메일주소를 작성합니다.
     author_email        = 'soc06103@gmail.com',
     # 배포하는 패키지의 url을 적어줍니다. 보통 github 링크를 적습니다.
-    url                 = 'https://github.com/hYe0kjUn/pystock',
+    url                 = 'https://github.com/hYe0kjUn/pystock-hts',
     # 배포하는 패키지의 다운로드 url을 적어줍니다.
-    download_url        = 'https://github.com/hYe0kjUn/pystock/archive/master.zip',
+    download_url        = 'https://github.com/hYe0kjUn/pystock-hts/archive/master.zip',
     # 해당 패키지를 사용하기 위해 필요한 패키지를 적어줍니다. ex. install_requires= ['numpy', 'django']
     # 여기에 적어준 패키지는 현재 패키지를 install할때 함께 install됩니다.
     install_requires    =  [],
