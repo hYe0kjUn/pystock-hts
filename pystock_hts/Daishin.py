@@ -96,7 +96,7 @@ class CpSysDib():
                     date_list.append(date)
             elif field == 3:
                 for i in range(data_count):
-                    stock_high_price.append(inst_stock_chart.GetDateValue(0, i))
+                    stock_high_price.append(inst_stock_chart.GetDataValue(0, i))
             elif field == 4:
                 for i in range(data_count):
                     stock_low_price.append(inst_stock_chart.GetDataValue(0, i))
