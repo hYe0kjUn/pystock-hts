@@ -80,7 +80,7 @@ class CpSysDib():
             inst_stock_chart.SetInputValue(6, ord('D')) #차트 구분
             # D: 일 / W: 주 / M: 월 / m: 분 / T: 틱
             inst_stock_chart.SetInputValue(9, ord('1'))
-            inst_stock_chart.Block__Request()
+            inst_stock_chart.BlockRequest()
 
             data_count = inst_stock_chart.GetHeaderValue(3)
                 
@@ -106,7 +106,7 @@ class CpSysDib():
         inst_market_eye = win32com.client.Dispatch("CpSysDib.StockUniMst")
 
         inst_market_eye.SetInputValue(0, stock_code)
-        inst_market_eye.Block__Request()
+        inst_market_eye.BlockRequest()
 
         per = inst_market_eye.GetHeaderValue(98)
 
