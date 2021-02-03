@@ -34,3 +34,11 @@
 
     getStockPer(stock_code: string) -> number
         - 주식 코드에 대한 PER 반환
+
+**CpTrade**
+
+    buyStock(stock_code: string) -> boolean
+        - 시장가로 stock_code 에 해당하는 종목을 매수
+
+    sellStock(stock_code: string) -> boolean
+        - 시장가로 stock_code 에 해당하는 종목을 매도
