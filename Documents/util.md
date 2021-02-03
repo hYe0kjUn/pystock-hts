@@ -1,0 +1,2 @@
+calculateCompoundInterest(seed_money: int, percent: int, after_date: int, end_date: int, after_date_type: int, end_date_type: int) -> int
+  - 복리 계산기 (seed_money 가 percent 만큼 after_date after_date_type 마다 이자가 발생할 때, end_date end_date_type 후에 금액은)

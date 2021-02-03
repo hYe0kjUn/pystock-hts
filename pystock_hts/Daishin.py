@@ -63,9 +63,12 @@ class CpSysDib():
         """
         stock_code 에 대한 chart return
         """
-        stock_chart_list = []
         date_list = []
-        fields = [5, 0]
+        stock_last_price = []
+        stock_high_price = []
+        stock_low_price = []
+        
+        fields = [0, 3, 4, 5]
 
         inst_stock_chart = win32com.client.Dispatch("CpSysDib.StockChart")
         
@@ -84,19 +87,24 @@ class CpSysDib():
 
             data_count = inst_stock_chart.GetHeaderValue(3)
                 
-            if stock_chart_list:
+            if field == 0:
                 for i in range(data_count):
                     year = str(inst_stock_chart.GetDataValue(0, i))[0:4]
                     month = str(inst_stock_chart.GetDataValue(0, i))[4:6]
                     day = str(inst_stock_chart.GetDataValue(0, i))[6:]
                     date = f'{year}-{month}-{day}'
                     date_list.append(date)
-
-            else:
+            elif field == 3:
                 for i in range(data_count):
-                    stock_chart_list.append(inst_stock_chart.GetDataValue(0, i))
+                    stock_high_price.append(inst_stock_chart.GetDateValue(0, i))
+            elif field == 4:
+                for i in range(data_count):
+                    stock_low_price.append(inst_stock_chart.GetDataValue(0, i))
+            elif field == 5:
+                for i in range(data_count):
+                    stock_last_price.append(inst_stock_chart.GetDataValue(0, i))
 
-        return date_list, stock_chart_list
+        return date_list, stock_last_price, stock_low_price, stock_last_price
 
 
     def getStockPer(self, stock_code):
@@ -113,6 +121,10 @@ class CpSysDib():
         return per
     
 class CpTrade():
+    def __init__(self):
+        cp_trade_util = win32com.client.Dispatch("CpTrade.CpTdUtil")
+        cp_trade_util.TradeInit()
+        self.account_number = cp_trade_util.AccountNumber[0]
     
     def buyStock(self, stock_code):
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
@@ -121,7 +133,7 @@ class CpTrade():
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
-        cp_trade.SetInputValue(8, 3) # 3: 시장가, 12: 최유리, 13: 최우선
+        cp_trade.SetInputValue(8, "03") # 3: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
         
@@ -140,7 +152,7 @@ class CpTrade():
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
-        cp_trade.SetInputValue(8, 3) # 3: 시장가, 12: 최유리, 13: 최우선
+        cp_trade.SetInputValue(8, "03") # 03: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
         

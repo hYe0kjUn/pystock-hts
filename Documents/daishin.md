@@ -27,8 +27,8 @@
 
 **CpSysDib**
 
-    getStockChartPriceToDate(date_count: number, stock_code: string) -> date_list: array, stcok_chart_list: array
-        - 일수 (date_count) 만큼의 과거 종가 반환
+    getStockChartPriceToDate(date_count: number, stock_code: string) -> date_list: list, stock_high_price: list, stock_low_price: list, stock_last_price: list
+        - 일수 (date_count) 만큼의 과거 일자, 고가, 저가, 종가 반환
 
 ---
 
