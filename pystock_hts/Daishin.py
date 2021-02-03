@@ -113,8 +113,6 @@ class CpSysDib():
         return per
     
 class CpTrade():
-    def __init__(self, account_number):
-        self.account_number = account_number
     
     def buyStock(self, stock_code):
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
@@ -134,7 +132,9 @@ class CpTrade():
         
         
     def sellStock(self, stock_code):
+        cp_trade_util = win32com.client.Dispatch("CpTrade.CpTdUtil")
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
+        cp_trade_util.TradeInit()
         
         cp_trade.SetInputValue(0, 1)    # 1: 매도, 2: 매수
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
