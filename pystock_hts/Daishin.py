@@ -55,7 +55,15 @@ class CpUtil():
             stock_name = self.getStockCodeToName(stock_code)
             stock_info_obj[stock_code] = stock_name
         return stock_info_obj
-
+    
+    # 호출 제한까지 남은 호출량 확인
+    def GetLimitRemainCount(self):
+        """
+        호출 제한까지 남은 호출량 확인
+        """
+        
+        res = self.__request('CpCyBos').GetLimitRemainCount("LT_NONTRADE_REQUEST")
+        return res
 
 class CpSysDib():
 
@@ -104,7 +112,7 @@ class CpSysDib():
                 for i in range(data_count):
                     stock_last_price.append(inst_stock_chart.GetDataValue(0, i))
 
-        return date_list, stock_last_price, stock_low_price, stock_last_price
+        return date_list, stock_high_price, stock_low_price, stock_last_price
 
 
     def getStockPer(self, stock_code):
