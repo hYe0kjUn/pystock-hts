@@ -143,6 +143,7 @@ class CpTrade():
         cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
+        cp_trade.SetInputValue(7, "0") # 주문 조건 구분 코드, 0: 기본 1: IOC 2:FOK
         cp_trade.SetInputValue(8, "03") # 3: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
@@ -161,6 +162,7 @@ class CpTrade():
         cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
+        cp_trade.SetInputValue(7, "0") # 주문 조건 구분 코드, 0: 기본 1: IOC 2:FOK
         cp_trade.SetInputValue(8, "03") # 03: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
