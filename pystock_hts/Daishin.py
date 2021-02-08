@@ -130,15 +130,17 @@ class CpSysDib():
     
 class CpTrade():
     def __init__(self):
-        cp_trade_util = win32com.client.Dispatch("CpTrade.CpTdUtil")
-        cp_trade_util.TradeInit()
-        self.account_number = cp_trade_util.AccountNumber[0]
+        self.cp_trade_util = win32com.client.Dispatch("CpTrade.CpTdUtil")
+        self.cp_trade_util.TradeInit()
+        self.account_number = self.cp_trade_util.AccountNumber[0]
+        self.acc_flag = self.cp_trade_util.GoodsList(self.account_number, 1)
     
     def buyStock(self, stock_code):
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
         
         cp_trade.SetInputValue(0, 2)    # 1: 매도, 2: 매수
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
+        cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
         cp_trade.SetInputValue(8, "03") # 3: 시장가, 12: 최유리, 13: 최우선
@@ -152,12 +154,11 @@ class CpTrade():
         
         
     def sellStock(self, stock_code):
-        cp_trade_util = win32com.client.Dispatch("CpTrade.CpTdUtil")
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
-        cp_trade_util.TradeInit()
         
         cp_trade.SetInputValue(0, 1)    # 1: 매도, 2: 매수
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
+        cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
         cp_trade.SetInputValue(8, "03") # 03: 시장가, 12: 최유리, 13: 최우선
