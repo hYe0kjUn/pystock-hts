@@ -138,7 +138,7 @@ class CpTrade():
     def buyStock(self, stock_code):
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
         
-        cp_trade.SetInputValue(0, 2)    # 1: 매도, 2: 매수
+        cp_trade.SetInputValue(0, "2")    # 1: 매도, 2: 매수
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
         cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
@@ -156,7 +156,7 @@ class CpTrade():
     def sellStock(self, stock_code):
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
         
-        cp_trade.SetInputValue(0, 1)    # 1: 매도, 2: 매수
+        cp_trade.SetInputValue(0, "1")    # 1: 매도, 2: 매수
         cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
         cp_trade.SetInputValue(2, self.acc_flag[0])
         cp_trade.SetInputValue(3, stock_code)   # 종목 코드
