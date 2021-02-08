@@ -139,16 +139,18 @@ class CpTrade():
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
         
         cp_trade.SetInputValue(0, "2")    # 1: 매도, 2: 매수
-        cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
-        cp_trade.SetInputValue(2, self.acc_flag[0])
-        cp_trade.SetInputValue(3, stock_code)   # 종목 코드
+        cp_trade.SetInputValue(1, str(self.account_number))  # 계좌번호
+        cp_trade.SetInputValue(2, str(self.acc_flag[0]))
+        cp_trade.SetInputValue(3, str(stock_code))   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
+        cp_trade.SetInputValue(5, 0)    # 주문단가
         cp_trade.SetInputValue(7, "0") # 주문 조건 구분 코드, 0: 기본 1: IOC 2:FOK
-        cp_trade.SetInputValue(8, "03") # 3: 시장가, 12: 최유리, 13: 최우선
+        cp_trade.SetInputValue(8, "03") # 01: 보통 03: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
         
-        if not cp_trade.GetHeaderValue(8):
+        if cp_trade.GetDibStatus() != 0:
+            print("dibMsg: ", cp_trade.GetDibMsg1())
             return False
         
         return True
@@ -158,16 +160,18 @@ class CpTrade():
         cp_trade = win32com.client.Dispatch("CpTrade.CpTd0311")
         
         cp_trade.SetInputValue(0, "1")    # 1: 매도, 2: 매수
-        cp_trade.SetInputValue(1, self.account_number)  # 계좌번호
-        cp_trade.SetInputValue(2, self.acc_flag[0])
-        cp_trade.SetInputValue(3, stock_code)   # 종목 코드
+        cp_trade.SetInputValue(1, str(self.account_number))  # 계좌번호
+        cp_trade.SetInputValue(2, str(self.acc_flag[0]))
+        cp_trade.SetInputValue(3, str(stock_code))   # 종목 코드
         cp_trade.SetInputValue(4, 1)    # 주문수량
+        cp_trade.SetInputValue(5, 0)    # 주문단가
         cp_trade.SetInputValue(7, "0") # 주문 조건 구분 코드, 0: 기본 1: IOC 2:FOK
         cp_trade.SetInputValue(8, "03") # 03: 시장가, 12: 최유리, 13: 최우선
         
         cp_trade.BlockRequest()
         
-        if not cp_trade.GetHeaderValue(8):
+        if cp_trade.GetDibStatus() != 0:
+            print("dibMsg: ", cp_trade.getDibMsg1())
             return False
         
         return True
